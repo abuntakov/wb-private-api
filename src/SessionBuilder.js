@@ -10,7 +10,7 @@ class SessionBuilder {
    * It creates a new instance of Axios
    * @returns An Axios instance
    */
-  static create() {
+  static create(options = {}) {
     const session = Axios.create({
       httpAgent: new http.Agent({ keepAlive: true }),
       httpsAgent: new https.Agent({ keepAlive: true }),
@@ -22,6 +22,7 @@ class SessionBuilder {
         "User-Agent": Constants.USERAGENT,
         "Content-Encoding": "Accept-Encoding: gzip, deflate, br",
       },
+      ...options,
     });
 
     axiosRetry(session, {

@@ -11,8 +11,8 @@ format.extend(String.prototype, {});
 
 class WBPrivateAPI {
   /* Creating a new instance of the class WBPrivateAPI. */
-  constructor({ destination }) {
-    this.session = SessionBuilder.create();
+  constructor({ destination, sessionOptions = {} }) {
+    this.session = SessionBuilder.create(sessionOptions);
     this.destination = destination;
   }
 
@@ -112,7 +112,7 @@ class WBPrivateAPI {
           return error.response.status === 429 || error.response.status >= 500;
         },
       },
-      
+
     });
 
     if (

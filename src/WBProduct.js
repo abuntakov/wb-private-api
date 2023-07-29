@@ -14,8 +14,8 @@ class WBProduct {
   feedbacks = [];
   _rawResponse = {};
 
-  constructor(product) {
-    this.session = SessionBuilder.create();
+  constructor(product, sessionOptions = {}) {
+    this.session = SessionBuilder.create(sessionOptions);
     if (typeof product !== "number") {
       Object.assign(this, product);
     } else {
@@ -23,8 +23,8 @@ class WBProduct {
     }
   }
 
-  static async create(productId) {
-    const instance = new WBProduct(productId);
+  static async create(productId, sessionOptions) {
+    const instance = new WBProduct(productId, sessionOptions);
     await Promise.all([
       instance.getProductData(),
       instance.getDetailsData(),
